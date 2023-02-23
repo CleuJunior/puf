@@ -1,0 +1,47 @@
+{
+  "name": "puf-api",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "Cleonildo Junior",
+    "email": "cleu.junior@gmail.com"
+  },
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "fix": "run-s \"fix:* {@}\" --",
+    "fix:lint": "eslint --fix --no-error-on-unmatched-pattern",
+    "fix:format": "prettier --write",
+    "format": "yarn fix:format 'src/**/*.(js|ts|md|json)'",
+    "lint": "yarn fix:lint src/**/*.{js|ts|md|json}",
+    "prebuild": "rimraf ./dist",
+    "build": "babel src --extensions \".js\" --ignore \"*.spec.js,*.test.js\" --out-dir dist --copy-files",
+    "dev": "nodemon --exec babel-node src/index.js"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "./scr/**/*.{js,md,json}": [
+      "yarn fix"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/node": "^7.20.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "rimraf": "^4.1.2"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
